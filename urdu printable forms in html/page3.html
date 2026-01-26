@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Processing Slip</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Changed height to min-height */
+            margin: 0;
+            padding: 20px; /* Added padding for better spacing on smaller screens */
+            box-sizing: border-box; /* Added box-sizing for padding and border inclusion */
+        }
+        .container {
+            width: 90%;
+            max-width: 800px; /* Added a maximum width for larger screens */
+            background: white;
+            padding: 20px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px 0; /* Added margin for spacing around the container */
+        }
+        .top-part {
+            border: 1px solid black;
+            padding: 10px;
+            position: relative;
+        }
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .logo {
+            position: absolute;
+            left: 10px; /* Added some spacing from the left */
+            width: 100px;
+            height: 50px;
+        }
+        .title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 30px;
+        }
+        .processing-slip {
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+            text-decoration: underline;
+            margin-top: -5px;
+        }
+        .top-right {
+            text-align: right;
+            font-size: 14px;
+            font-weight: bold;
+            align-self: flex-end;
+            margin-top: 5px;
+        }
+        .info-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            margin-bottom: 10px;
+            flex-wrap: wrap; /* Added flex-wrap for responsiveness */
+            gap: 10px; /* Added gap for spacing between items */
+        }
+        .branch {
+            font-weight: bold;
+            text-align: left;
+            font-size: 20px;
+            flex-basis: calc(50% - 5px); /* Distribute width and account for gap */
+        }
+        .branch input {
+            font-size: 16px;
+            padding: 2px 5px;
+            border: none;
+            border-bottom: 1px solid #000;
+            width: calc(100% - 10px); /* Adjust width for padding */
+            box-sizing: border-box; /* Ensure padding is inside the width */
+        }
+        .hyphen-line {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 5px 0;
+            overflow-wrap: break-word; /* Prevent long lines from overflowing */
+        }
+        .info-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 10px;
+            flex-wrap: wrap; /* Added flex-wrap for responsiveness */
+            gap: 10px; /* Added gap for spacing */
+        }
+        .content-wrapper {
+            display: flex;
+            align-items: center;
+            flex-basis: 60%; /* Adjust as needed */
+            min-width: 200px; /* Prevent collapsing */
+        }
+        .curly-bracket {
+            font-size: 60px;
+            font-weight: bold;
+            line-height: 1;
+            padding: 10px; /* Reduced padding */
+        }
+        .left-text {
+            font-size: 18px; /* Reduced font size for better wrapping */
+            padding-left: 10px;
+            line-height: 1.4; /* Adjusted line height */
+        }
+        .right-text {
+            text-align: right;
+            flex-basis: 35%; /* Adjust as needed */
+            min-width: 150px; /* Prevent collapsing */
+            direction: rtl;
+            font-size: 20px; /* Reduced font size */
+        }
+        .highlight-box {
+            border: 1px solid black;
+            display: inline-block;
+            padding: 3px 8px; /* Reduced padding */
+            font-weight: bold;
+            font-size: 18px; /* Reduced font size */
+            margin-left: 5px; /* Reduced margin */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        td {
+            padding: 6px;
+            font-size: 14px;
+            text-align: left; /* Default text alignment to left */
+        }
+        td:first-child {
+            font-weight: bold;
+            width: 150px;
+        }
+        td:nth-child(2) {
+            width: 10px; /* Width for the colon */
+            text-align: center;
+        }
+        td:nth-child(3) {
+            width: auto; /* Adjust width for the input field */
+        }
+        td input {
+            font-size: 14px;
+            padding: 3px;
+            width: calc(100% - 6px); /* Adjust for padding */
+            border: none;
+            border-bottom: 1px solid black;
+            box-sizing: border-box; /* Ensure padding is inside the width */
+        }
+        .signature {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px; /* Reduced font size */
+            font-weight: bold;
+            border-top: 1px solid black;
+            padding-top: 10px;
+            flex-wrap: wrap; /* Added flex-wrap */
+            gap: 10px; /* Added gap */
+        }
+        .print-button {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .print-button button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #004d00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 10mm;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            body * {
+                visibility: hidden;
+            }
+
+            .container, .container * {
+                visibility: visible;
+            }
+
+            .container {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                max-width: 270mm; /* fits inside landscape A4 minus margins */
+                margin: 0 auto;
+                box-shadow: none;
+                background: white;
+                padding: 0;
+            }
+
+            .print-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="printSection">
+    <div class="top-part">
+        <div class="header">
+            <img src="images/logo.png" alt="Logo" class="logo">
+            <div class="title">Al Imran Electronics</div>
+            <div class="top-right">Created By: SDR01</div>
+            <div class="processing-slip">Processing Slip</div>
+            <div class="top-right">Print By: SDR01</div>
+            <div class="top-right" id="datetime"></div>
+        </div>
+
+        <div class="info-line">
+            <div class="branch">Branch:
+                <input type="text" placeholder="Enter branch name" />
+            </div>
+        </div>
+
+        <div class="hyphen-line">--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</div>
+
+        <div class="info-box">
+            <div class="left-text">
+                <div class="content-wrapper">
+                    <div class="curly-bracket">{</div>
+                    <div class="left-text">
+                        پیشتر اپنی قسط بروقت ادا کریں یا آن لائن بینکنگ کے ذریعے جمع کروائیں <br>
+                        اور رسید حاصل کریں۔ بغیر کمپیوٹرائزڈ رسید کے ادائیگی نہ کریں۔
+                    </div>
+                    <div class="curly-bracket">}</div>
+                </div>
+            </div>
+            <div class="right-text">
+                اپنی قسط ہر ماہ کی <span class="highlight-box"><input type="text" style="width: 30px; text-align: center; border: none; border-bottom: 1px solid black; font-weight: bold; font-size: inherit;" placeholder="DD"></span> تاریخ تک لازمی ادا کریں۔
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="top-part">
+        <table>
+            <tr>
+                <td>Processing No.</td><td>:</td><td><input type="text" /></td>
+                <td>Processing Date</td><td>:</td><td><input type="text" /></td>
+            </tr>
+            <tr>
+                <td>Customer Code</td><td>:</td><td><input type="text" /></td>
+                <td>Type</td><td>:</td><td><input type="text" /></td>
+            </tr>
+            <tr>
+                <td>Customer Name</td><td>:</td><td><input type="text" /></td>
+                <td>Product</td><td>:</td><td><input type="text" /></td>
+            </tr>
+            <tr>
+                <td>Father / Husband</td><td>:</td><td><input type="text" /></td>
+                <td>Model</td><td>:</td><td><input type="text" /></td>
+            </tr>
+            <tr>
+                <td>Cell No.</td><td>:</td><td><input type="text" /></td>
+            </tr>
+            <tr>
+                <td>CNIC</td><td>:</td><td><input type="text" /></td>
+            </tr>
+        </table>
+
+        <div class="signature">
+            <div>Signature: __________________</div>
+            <div>Customer Care Helpline: 03-111-315-315</div>
+            <div>Generated from SAP</div>
+        </div>
+    </div>
+
+    <div class="print-button">
+        <button onclick="window.print()">Print</button>
+    </div>
+</div>
+
+<script>
+    // Pakistan Standard Time (UTC+5)
+    function updateDateTime() {
+        const now = new Date();
+        const options = {
+            timeZone: 'Asia/Karachi',
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        };
+        const formatted = now.toLocaleString('en-PK', options);
+        document.getElementById("datetime").textContent = "Print Date/Time: " + formatted;
+    }
+
+    updateDateTime();
+</script>
+
+</body>
+</html>

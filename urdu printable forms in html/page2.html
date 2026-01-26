@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>شرائط</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap');
+
+    body {
+      font-family: 'Noto Nastaliq Urdu', Arial, sans-serif;
+      direction: rtl;
+      text-align: right;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #fff;
+    }
+
+    .page {
+      width: 90%;
+      max-width: 600px;
+      background: white;
+      padding: 20px;
+      border: 1px solid #004d00;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      color: #004d00;
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      font-size: 14px;
+      margin-bottom: 8px;
+      padding-right: 18px;
+      position: relative;
+    }
+
+    li::before {
+      content: '\2022';
+      color: #004d00;
+      font-weight: bold;
+      font-size: 30px;
+      position: absolute;
+      right: -10px;
+      top: 25%;
+      transform: translateY(-50%);
+    }
+
+    .highlight {
+      background-color: #004d00;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 16px;
+      margin-top: 15px;
+      clip-path: polygon(5% 0%, 95% 0%, 100% 35%, 92% 50%, 100% 65%, 95% 100%, 5% 100%, 0% 65%, 8% 50%, 0% 35%);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 20px;
+      color: #004d00;
+      margin-top: 20px;
+    }
+
+    .agreement {
+      font-size: 14px;
+    }
+
+    .signature {
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .border-box {
+      padding: 8px;
+      margin-top: 15px;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    input.underline {
+      border: none;
+      border-bottom: 1px solid #000;
+      background: transparent;
+      width: 150px;
+      font-size: 14px;
+      text-align: right;
+    }
+
+    .print-button {
+      margin-top: 20px;
+      align-self: center;
+      background-color: #004d00;
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+
+      .page, .page * {
+        visibility: visible;
+      }
+
+      .page {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .print-button {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page" id="print-section">
+    <h1>شرائط</h1>
+    <ul>
+      <li>آپ کو ایک شخصی ضمانت دینی ہوگی جو سرکاری ملازم ہو یا پرائیویٹ ادارے کے ملازم ہو، ادارہ خود ذمہ دار نہ ہوگا۔</li>
+      <li>دو شناختی کارڈ ادارے میں جمع کروانے ہوں گے، جن میں ایک اصل ہوگا اور دوسرا کاپی جمع کروانی ہوگی۔</li>
+      <li>مقررہ وقت پر ادائیگی نہ ہونے کی صورت میں دی گئی چیزوں کی گارنٹی منسوخ تصور ہوگی۔</li>
+      <li>مقررہ وقت پر پہلے ادائیگی کی جائے گی، جس کے بعد چیز فراہم کی جائے گی۔</li>
+      <li>مقررہ وقت پر ادائیگی نہ ہونے کی صورت میں اضافی جرمانہ عائد ہوگا۔</li>
+      <li>ادارہ کسی بھی غیر متوقع حالات کی وجہ سے چیز کی فراہمی کا ذمہ دار نہ ہوگا۔</li>
+      <li>کسی بھی غیر ضروری انکار کی صورت میں چیز کی واپسی ممکن نہ ہوگی۔</li>
+      <li>ڈلیوری کے بعد کسی بھی چیز کی صورت میں ادارہ کی کوئی ذمہ داری نہ ہوگی، کمپنی ذمہ دار ہوگی۔</li>
+    </ul>
+
+    <div class="highlight">کوئی بھی چیز خراب ہونے کی صورت میں آئیٹم تبدیل نہ ہوگا، کمپنی وارنٹی کی ذمہ دار ہوگی۔</div>
+
+    <h2>اقرار نامہ درخواست گزار</h2>
+    <p class="agreement">
+      میں مسمی
+      <input type="text" class="underline" placeholder="نام درج کریں" />
+      ولد
+      <input type="text" class="underline" placeholder="والد کا نام" />
+      اس امر کا اقرار کرتا/کرتی ہوں کہ مذکورہ شرائط کو پڑھ اور سمجھ چکا ہوں۔ میں ان شرائط کی مکمل پاسداری کروں گا/گی۔ کسی بھی خلاف ورزی کی صورت میں ادارہ اور ذمہ داران جوابدہ نہ ہوں گے۔
+    </p>
+
+    <div class="border-box">
+      <p>دستخط و انگوٹھا نشان درخواست دہندہ _____________________</p>
+    </div>
+
+    <button class="print-button" onclick="window.print()">پرنٹ کریں</button>
+  </div>
+</body>
+</html>
